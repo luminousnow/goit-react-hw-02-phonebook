@@ -1,8 +1,8 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { array } from 'prop-types';
 import s from './ContactList.module.css';
 
-function ContactList({ contactList }) {
+function ContactList({ contactList, onDeleteContact }) {
   return (
     <ul className={s.contactList}>
       {contactList.map(({ id, name, number }) => (
@@ -10,6 +10,15 @@ function ContactList({ contactList }) {
           <p className={s.text}>
             {name}: {number}
           </p>
+          <button
+            type="button"
+            className={s.button}
+            onClick={() => {
+              onDeleteContact(id);
+            }}
+          >
+            delete
+          </button>
         </li>
       ))}
     </ul>
@@ -17,9 +26,7 @@ function ContactList({ contactList }) {
 }
 
 ContactList.propTypes = {
-  id: string.isRequired,
-  name: string.isRequired,
-  number: string.isRequired,
+  contactList: array.isRequired,
 };
 
 export default ContactList;

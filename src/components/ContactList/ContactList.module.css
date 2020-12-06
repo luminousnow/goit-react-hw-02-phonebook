@@ -1,0 +1,20 @@
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  margin: 10px 0px;
+
+  border: 1px solid gray;
+  font-weight: 600;
+}
+
+.button {
+  padding: 3px;
+
+  font-size: 11px;
+
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 8px;
+}

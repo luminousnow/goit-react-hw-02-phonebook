@@ -1,5 +1,5 @@
 import React from 'react';
-import { element } from 'prop-types';
+import { node } from 'prop-types';
 import s from './Section.module.css';
 
 function Section({ children }) {
@@ -7,7 +7,7 @@ function Section({ children }) {
 }
 
 Section.propTypes = {
-  children: element.isRequired,
+  children: node.isRequired,
 };
 
 export default Section;
