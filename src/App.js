@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import ContactList from './components/ContactList';
+import Container from './components/Container';
+import Section from './components/Section/Section';
 
 class App extends Component {
   state = {
@@ -16,15 +19,19 @@ class App extends Component {
   render() {
     const { contacts } = this.state;
 
-    return;
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>;
+    return (
+      <Container>
+        <Section>
+          <h1>Phonebook</h1>
+          {/* <ContactForm /> */}
+        </Section>
+        <Section>
+          <h2>Contacts</h2>
+          {/* <Filter /> */}
+          <ContactList contactList={contacts} />
+        </Section>
+      </Container>
+    );
   }
 }
 
