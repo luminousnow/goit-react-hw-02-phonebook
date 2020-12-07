@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Container from './components/Container';
 import Section from './components/Section/Section';
@@ -12,8 +13,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   deleteContact = contactId => {
@@ -22,15 +21,19 @@ class App extends Component {
     }));
   };
 
+  getContactsData = data => {
+    console.log(data);
+  };
+
   render() {
     const { contacts } = this.state;
-    const { deleteContact } = this;
+    const { deleteContact, getContactsData } = this;
 
     return (
       <Container>
         <Section>
           <h1>Phonebook</h1>
-          {/* <ContactForm /> */}
+          <ContactForm getContactsData={getContactsData} />
         </Section>
         <Section>
           <h2>Contacts</h2>
