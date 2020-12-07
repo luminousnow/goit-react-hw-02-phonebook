@@ -7,27 +7,33 @@ class ContactForm extends Component {
     number: '',
   };
 
-  // зміна полів інпута
+  // динамічно рендерить зміну полів інпутів
   handleImputChange = e => {
     const { name, value } = e.currentTarget;
 
     this.setState({ [name]: value });
   };
 
-  // клік на кнопку "add contact"
-  onAddContactButtonPressed = e => {
+  // виконується при Сабміті форми
+  onSubmitPress = e => {
     e.preventDefault();
 
-    // пролкидаємо в Арр
+    // результати полів прокидає в Арр
     this.props.getContactsData(this.state);
+    this.resetFormField();
+  };
+
+  // очищає поля форми
+  resetFormField = () => {
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     const { name, number } = this.state;
-    const { onAddContactButtonPressed, handleImputChange } = this;
+    const { onSubmitPress, handleImputChange } = this;
 
     return (
-      <form onSubmit={onAddContactButtonPressed} className={s.form}>
+      <form onSubmit={onSubmitPress} className={s.form}>
         <fieldset className={s.fieldset}>
           <label className={s.label}>
             name
