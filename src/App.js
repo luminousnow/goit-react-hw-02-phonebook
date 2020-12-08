@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Container from './components/Container';
@@ -21,19 +22,22 @@ class App extends Component {
     }));
   };
 
-  getContactsData = data => {
-    console.log(data);
+  getContactData = data => {
+    const id = uuidv4();
+    const contact = { id, ...data };
+    console.log(contact);
+    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
 
   render() {
     const { contacts } = this.state;
-    const { deleteContact, getContactsData } = this;
+    const { deleteContact, getContactData } = this;
 
     return (
       <Container>
         <Section>
           <h1>Phonebook</h1>
-          <ContactForm getContactsData={getContactsData} />
+          <ContactForm getContactData={getContactData} />
         </Section>
         <Section>
           <h2>Contacts</h2>
