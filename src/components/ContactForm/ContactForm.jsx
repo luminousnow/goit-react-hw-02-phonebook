@@ -10,7 +10,6 @@ class ContactForm extends Component {
   // динамічно рендерить зміну полів інпутів
   handleImputChange = e => {
     const { name, value } = e.currentTarget;
-
     this.setState({ [name]: value });
   };
 
@@ -19,7 +18,8 @@ class ContactForm extends Component {
     e.preventDefault();
 
     // результати полів прокидає в Арр
-    this.props.getContactsData(this.state);
+    this.props.getContactData(this.state);
+
     this.resetFormField();
   };
 
