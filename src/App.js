@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Container from './components/Container';
+import Filter from './components/Filter/Filter';
 import Section from './components/Section/Section';
 
 class App extends Component {
@@ -19,16 +20,37 @@ class App extends Component {
   };
 
   // отримує параметри з Форми, додає ІД і формує повноцінний контакт
-  getContactData = data => {
+  getContactData = ({ name, number }) => {
     const id = uuidv4();
-    const contact = { id, ...data };
-    console.log(contact);
+    const contact = { id, name, number };
+
     this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
 
+  getFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    const normalizeFilter = filter.toLowerCase();
+
+    return contacts.filter(person =>
+      person.name.toLowerCase().includes(normalizeFilter),
+    );
+  };
+
+  // пише значення в Стейт
+  changeFilter = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
+  };
+
   render() {
-    const { contacts } = this.state;
-    const { deleteContact, getContactData } = this;
+    const { filter } = this.state;
+    const {
+      deleteContact,
+      getContactData,
+      changeFilter,
+      getFilteredContacts,
+    } = this;
+    const filteredContacts = getFilteredContacts();
 
     return (
       <Container>
@@ -37,9 +59,12 @@ class App extends Component {
           <ContactForm getContactData={getContactData} />
         </Section>
         <Section>
-          {this.state.contacts.length > 0 && <h2>Contacts</h2>}
-          {/* <Filter /> */}
-          <ContactList contactList={contacts} onDeleteContact={deleteContact} />
+          <h2>Contacts</h2>
+          <Filter filter={filter} changeFilter={changeFilter} />
+          <ContactList
+            contactList={filteredContacts}
+            onDeleteContact={deleteContact}
+          />
         </Section>
       </Container>
     );
