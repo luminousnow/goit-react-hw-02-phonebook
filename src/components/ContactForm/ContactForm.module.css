@@ -6,7 +6,6 @@
   display: grid;
   margin: 15px 0px;
 
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -24,7 +23,6 @@
   width: 400px;
 }
 
-.btnText {
-  display: contents;
+span::first-letter {
   text-transform: capitalize;
 }

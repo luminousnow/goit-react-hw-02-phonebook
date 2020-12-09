@@ -36,7 +36,7 @@ class ContactForm extends Component {
       <form onSubmit={onSubmitPress} className={s.form}>
         <fieldset className={s.fieldset}>
           <label className={s.label}>
-            name
+            <span>name</span>
             <input
               type="text"
               name="name"
@@ -46,7 +46,7 @@ class ContactForm extends Component {
             />
           </label>
           <label className={s.label}>
-            number
+            <span>number</span>
             <input
               type="tel"
               name="number"
@@ -56,7 +56,7 @@ class ContactForm extends Component {
             />
           </label>
           <button type="submit" className={s.button}>
-            <span className={s.btnText}>add</span> contacts
+            <span>add contacts</span>
           </button>
         </fieldset>
       </form>
