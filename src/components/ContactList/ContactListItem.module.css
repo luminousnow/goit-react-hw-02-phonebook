@@ -19,3 +19,9 @@
   text-transform: capitalize;
   border-radius: 8px;
 }
+
+.button:hover {
+  font-weight: bold;
+  background-color: indigo;
+  color: aliceblue;
+}
