@@ -17,13 +17,13 @@ class ContactForm extends Component {
   onSubmitPress = e => {
     e.preventDefault();
 
-    // результати полів прокидає в Арр
+    // результати полів прокидає в State Арр.js
     this.props.getContactData(this.state);
 
     this.resetFormField();
   };
 
-  // очищає поля форми
+  // очищає поля форми після Submit
   resetFormField = () => {
     this.setState({ name: '', number: '' });
   };
@@ -55,7 +55,11 @@ class ContactForm extends Component {
               className={s.input}
             />
           </label>
-          <button type="submit" className={s.button}>
+          <button
+            type="submit"
+            className={s.button}
+            disabled={!(name && number)}
+          >
             <span>add contacts</span>
           </button>
         </fieldset>
