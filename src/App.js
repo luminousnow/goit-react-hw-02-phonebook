@@ -12,21 +12,36 @@ class App extends Component {
     filter: '',
   };
 
-  // видаляє контакт по кліку на кнопку
+  // видаляє контакт по кліку на кнопку Delete
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(cont => cont.id !== contactId),
     }));
   };
 
-  // отримує параметри з Форми, додає ІД і формує повноцінний контакт
-  getContactData = ({ name, number }) => {
+  // отримує параметри з Форми, додає ІД, формує повноцінний контакт
+  addContact = ({ name, number }) => {
+    const { contacts } = this.state;
+
+    // створює контакт
     const id = uuidv4();
     const contact = { id, name, number };
 
-    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
+    // перевіряє чи відсутні дублі по імені
+    if (
+      contacts.find(
+        oldContact => oldContact.name.toLowerCase() === name.toLowerCase(),
+      )
+    ) {
+      return alert(`${name} is already in contact`);
+    }
+
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts],
+    }));
   };
 
+  // фільтрує створені контакти
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const normalizeFilter = filter.toLowerCase();
@@ -46,7 +61,7 @@ class App extends Component {
     const { filter } = this.state;
     const {
       deleteContact,
-      getContactData,
+      addContact,
       changeFilter,
       getFilteredContacts,
     } = this;
@@ -56,7 +71,7 @@ class App extends Component {
       <Container>
         <Section>
           <h1>Phonebook</h1>
-          <ContactForm getContactData={getContactData} />
+          <ContactForm getContactData={addContact} />
         </Section>
         <Section>
           <h2>Contacts</h2>
