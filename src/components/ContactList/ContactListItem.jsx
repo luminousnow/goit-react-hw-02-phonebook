@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, func } from 'prop-types';
 import s from './ContactListItem.module.css';
 
 function ContactListItem({ id, name, number, onDeleteContact }) {
@@ -19,5 +20,12 @@ function ContactListItem({ id, name, number, onDeleteContact }) {
     </li>
   );
 }
+
+ContactListItem.propTypes = {
+  id: string.isRequired,
+  name: string.isRequired,
+  number: number.isRequired,
+  onDeleteContact: func.isRequired,
+};
 
 export default ContactListItem;
